@@ -1,7 +1,7 @@
 <template>
   <div>
       <ul>
-        <li class="shadow" v-for="(todoItem, index) in todoItems" v-bind:key="todoItem">
+        <li class="shadow" v-for="(todoItem, index) in todoItems" v-bind:key="todoItem.item">
           <span>
             <i class="far fa-calendar-check checkBtn" v-bind:class="{checkBtnCompleted : todoItem.completed}" v-on:click="toggleCheckBtn(todoItem, index)"></i>
           </span>
@@ -18,32 +18,20 @@
 
 <script>
 export default {
+  props:['todoItems'],
   data : function(){
     return {
-      todoItems : []
     }
   },
   methods:{
     removeItem : function(todoItem, index){
-      localStorage.removeItem(todoItem);
-      this.todoItems.splice(index, 1);
+      this.$emit('removeItem', todoItem, index);
     },
     toggleCheckBtn : function(todoItem, index){
-      todoItem.completed = !todoItem.completed;
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
-      console.log(index);
+      this.$emit('toggleCheck', todoItem, index)
     }      
 
   },
-  created : function(){
-    console.log('create');
-    for (let i = 0; i < localStorage.length; i++) {
-      if( localStorage.key(i) !== "loglevel:webpack-dev-server")
-      this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-    }
-    
-  }
 }
 </script>
 
