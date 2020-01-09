@@ -1,7 +1,7 @@
 <template>
   <div>
       <ul>
-        <li class="shadow" v-for="(todoItem, index) in todoItems" v-bind:key="todoItem.item">
+        <li class="shadow" v-for="(todoItem, index) in this.$store.state.todoItems" v-bind:key="todoItem.item">
           <span>
             <i class="far fa-calendar-check checkBtn" v-bind:class="{checkBtnCompleted : todoItem.completed}" v-on:click="toggleCheckBtn(todoItem, index)"></i>
           </span>
@@ -18,7 +18,6 @@
 
 <script>
 export default {
-  props:['todoItems'],
   data : function(){
     return {
     }
