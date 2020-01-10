@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <todo-header/>
-    <todo-input/>
-    <todo-list v-on:removeItem="removeItemHandler" v-on:toggleCheck="toggleCheckHandler" />
-    <todo-footer v-on:clearAll="clearAllHandler"/>
+    <todo-input />
+    <todo-list />
+    <todo-footer />
   </div>
 </template>
 
@@ -14,26 +14,6 @@ import TodoList from './components/TodoList.vue'
 import TodoFooter from './components/TodoFooter.vue'
 
 export default {
-  data : function(){
-    return {
-      todoItems : []
-    }
-  },
-  methods:{
-    removeItemHandler(todoItem, index){
-      localStorage.removeItem(todoItem.item);
-      this.todoItems.splice(index, 1);
-    },
-    toggleCheckHandler : function(todoItem, index){
-      this.todoItems[index].completed = !this.todoItems[index].completed
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
-    },
-    clearAllHandler : function(){
-      localStorage.clear();
-      this.todoItems = [];
-    }
-  },
   components: {
     TodoHeader, TodoInput, TodoList, TodoFooter
   }

@@ -24,10 +24,10 @@ export default {
   },
   methods:{
     removeItem : function(todoItem, index){
-      this.$emit('removeItem', todoItem, index);
+      this.$store.commit('removeItem', {todoItem, index})
     },
     toggleCheckBtn : function(todoItem, index){
-      this.$emit('toggleCheck', todoItem, index)
+      this.$store.commit('toggleCheckBtn', {todoItem, index})
     }      
 
   },
