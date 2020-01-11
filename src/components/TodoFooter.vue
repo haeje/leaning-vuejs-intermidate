@@ -1,14 +1,23 @@
 <template>
   <div class="clearAllContainer">
       <span class="clearAllBtn" v-on:click="clearAll">Clear All</span>
+      <child-component @haha="log" />
+
   </div>
 </template>
 
 <script>
+import childComponent from './childComponent.vue'
 export default {
+  components:{
+    childComponent
+  },
   methods:{
     clearAll : function(){
       this.$store.commit('clearAll');
+    },
+    log(){
+      console.log('event receive at todoFooter');
     }
   }
 }

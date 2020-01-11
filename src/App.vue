@@ -3,7 +3,7 @@
     <todo-header/>
     <todo-input />
     <todo-list />
-    <todo-footer />
+    <todo-footer v-on:haha="log"/>
   </div>
 </template>
 
@@ -16,6 +16,12 @@ import TodoFooter from './components/TodoFooter.vue'
 export default {
   components: {
     TodoHeader, TodoInput, TodoList, TodoFooter
+  },
+  methods:{
+    log(){
+      console.log('event receive');
+      
+    }
   }
 }
 </script>

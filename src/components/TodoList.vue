@@ -1,14 +1,14 @@
 <template>
   <div>
       <ul>
-        <li class="shadow" v-for="(todoItem, index) in this.$store.state.todoItems" v-bind:key="todoItem.item">
+        <li class="shadow" v-for="(todoItem, index) in this.getTodoItems" v-bind:key="todoItem.item">
           <span>
-            <i class="far fa-calendar-check checkBtn" v-bind:class="{checkBtnCompleted : todoItem.completed}" v-on:click="toggleCheckBtn(todoItem, index)"></i>
+            <i class="far fa-calendar-check checkBtn" v-bind:class="{checkBtnCompleted : todoItem.completed}" v-on:click="toggleCheckBtn({todoItem, index})"></i>
           </span>
           <span v-bind:class="{textCompleted : todoItem.completed}">
             {{ todoItem.item }}
           </span>
-          <span class="removeBtn" v-on:click="removeItem(todoItem, index)">
+          <span class="removeBtn" v-on:click="removeItem({todoItem, index})">
             <i class="fas fa-trash-alt " ></i>
           </span>
         </li>
@@ -17,19 +17,16 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
 export default {
-  data : function(){
-    return {
-    }
+  computed:{
+    ...mapGetters(['getTodoItems'])
   },
   methods:{
-    removeItem : function(todoItem, index){
-      this.$store.commit('removeItem', {todoItem, index})
-    },
-    toggleCheckBtn : function(todoItem, index){
-      this.$store.commit('toggleCheckBtn', {todoItem, index})
-    }      
-
+    ...mapMutations({
+      removeItem : 'removeItem',
+      toggleCheckBtn : 'toggleCheckBtn'
+    }) 
   },
 }
 </script>
